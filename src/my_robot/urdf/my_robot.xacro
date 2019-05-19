@@ -42,12 +42,6 @@
   </joint>
 
 
-  <gazebo reference="left_wheel">
-    <material>Gazebo/Black</material>
-  </gazebo>
-
-
-
     <link name="right_wheel">
       <inertial>
       <mass value="5.0"/>
@@ -72,9 +66,6 @@
 	</visual>
     </link>
 
-  <gazebo reference="right_wheel">
-    <material>Gazebo/Black</material>
-  </gazebo>
 
 
   <joint type="continuous" name="right_wheel_hinge">
@@ -86,18 +77,16 @@
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
 
-
-   <link name="camera_plate">
-
-       <pose>0 0 0.3 0 0 0</pose>
-
+   <!-- Camera platform -->
+   <link name="camera_platform">
+       <pose>0 0 0 0 0 0</pose>
     <inertial>
-      <mass value="15.0"/>
+      <mass value="1.0"/>
       <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
       <inertia
-	  ixx="0.1" ixy="0" ixz="0"
-	  iyy="0.1" iyz="0"
-	  izz="0.1"
+        ixx="0.1" ixy="0" ixz="0"
+        iyy="0.1" iyz="0"
+        izz="0.1"
       />
     </inertial>
 
@@ -107,7 +96,6 @@
       <cylinder length="0.05" radius="0.15"/>
       </geometry>
     </collision>
-
     <visual>
       <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry>
@@ -115,15 +103,27 @@
       <cylinder length="0.05" radius="0.15"/>
       </geometry>
     </visual>
-
    </link>
 
-    <joint type="fixed" name="camera_plate_joint">
-    <origin xyz="0 0 0.3" rpy="0 0 0"/>
-    <child link="camera_plate"/>
+    <joint type="continuous" name="camera_platform_joint">
+    <dynamics friction='.05'/>
+    <origin xyz="0 0 0.225" rpy="0 0 0"/>
+      <limit effort="30" velocity="1.0"/>
+    <child link="camera_platform"/>
     <parent link="chassis"/>
-    <axis xyz="0 1 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1" rpy="0 0 0"/>
   </joint>
+
+  <transmission name="camera_platformtransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="camera_platform_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="camera_platform_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
 
    <!-- Camera -->
 
@@ -154,13 +154,51 @@
   </gazebo>
 
   <joint type="fixed" name="camera_joint">
-    <origin xyz="0.12 0 0" rpy="0 0 0"/>
+    <origin xyz="0.13 0 0" rpy="0 0 0"/>
     <child link="camera"/>
-    <parent link="camera_plate"/>
+    <parent link="camera_platform"/>
+    <axis xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+   <!-- Lidar platform -->
+
+  <link name="lidar_platform">
+    <pose>0 0 0 0 0 0</pose>
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
+      <inertia
+	  ixx="0.1" ixy="0" ixz="0"
+	  iyy="0.1" iyz="0"
+	  izz="0.1"
+      />
+    </inertial>
+
+    <collision name='collision'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+      <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+
+      <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+    </visual>
+
+  </link>
+
+    <joint type="fixed" name="lidar_platform_join">
+    <origin xyz="0 0 0.3" rpy="0 0 0"/>
+    <child link="lidar_platform"/>
+    <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
   </joint>
 
-   <!-- Lidar -->
+ <!-- Lidar -->
 
     <link name="hokuyo">
       <inertial>
@@ -184,9 +222,9 @@
     </link>
 
   <joint type="fixed" name="hokuyo_joint">
-    <origin xyz="0.15 0 0.15" rpy="0 0 0"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
     <child link="hokuyo"/>
-    <parent link="chassis"/>
+    <parent link="lidar_platform"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
   </joint>
 
@@ -259,13 +297,5 @@
     </visual>
 
   </link>
-
-    <gazebo reference="chassis">
-    <material>Gazebo/Orange</material>
-  </gazebo>
-
-
-
-
 
 </robot>
