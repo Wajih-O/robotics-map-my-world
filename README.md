@@ -5,7 +5,7 @@ It has a "mission" of chasing a white ball based on the camera image: it assumes
 sensed image an searching for the white pixels location. If a white ball exists in the image, a `process_image` C++ node requests
 a `ball_chaser/command_robot` service provided by another C++ node called `drive_bot` to drive the robot towards it.
 
-The robot is housed in a 14mx12m one floor flat.
+The robot is housed in a 14m x 12m one floor flat.
 
 
 # Robot and world (top) overview
