@@ -12,6 +12,6 @@ The robot is housed inside a world: a 14mx12m one floor flat.
 ![diagram](images/top_view.jpg)
 
 # The robot chasing
-![diagram](images/chasing.jpg)
+![](images/chasing.gif)
 
 
