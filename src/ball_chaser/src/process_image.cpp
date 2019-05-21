@@ -72,8 +72,9 @@ void process_image_callback(const sensor_msgs::Image img)
     int white_pixel = 255;
 
     // compute image region limits
-    auto third_width = img.width / 3;
-    std::tuple<int,int> regions_limits = {third_width, 2*third_width};
+    int third_width = img.width / 3;
+    std::tuple<int, int> regions_limits = std::make_tuple(third_width, 2*third_width);
+
 
     // Loop through each pixel in the image and check if there's a bright white one
     // Then, identify if this pixel falls in the left, mid, or right side of the image
