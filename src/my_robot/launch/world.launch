@@ -34,5 +34,5 @@
               -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>
 
   <!-- launch rviz -->
-  <!-- <node name="rviz" pkg="rviz" type="rviz" respawn="false"/> -->
+   <node name="rviz" pkg="rviz" type="rviz" args="-d /home/wajih/robotics_nd/where-am-i/where-am-i.rviz"/>
 </launch>
