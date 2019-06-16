@@ -106,7 +106,7 @@
    </link>
 
     <joint type="continuous" name="camera_platform_joint">
-    <dynamics friction='.05'/>
+    <dynamics friction='0.05'/>
     <origin xyz="0 0 0.225" rpy="0 0 0"/>
       <limit effort="30" velocity="1.0"/>
     <child link="camera_platform"/>
