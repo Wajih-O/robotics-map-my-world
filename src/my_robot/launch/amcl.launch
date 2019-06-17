@@ -8,31 +8,40 @@
 <node name="amcl" pkg="amcl" type="amcl" output="screen" >
 
 <!-- <remap from="/scan" to="/my_robot/laser/scan"/> -->
+
+<!-- odom params -->
 <param name="odom_frame_id" value="odom"/>
 <param name="odom_model_type" value="diff-corrected"/>
+<param name="odom_alphas" value="1"/>
+
 <param name="base_frame_id" value="robot_footprint"/>
 <param name="global_frame_id" value="map"/>
-<param name="transform_tolerance" value="0.6"/>
+<param name="transform_tolerance" value="0.1"/>
 
+<!-- initial pose -->
 <param name="initial_pose_x" value="0"/>
 <param name="initial_pose_y" value="0"/>
+
 <!-- min/max particles param -->
 <param name="min_particles" value="100"/>
 <param name="max_particles" value="1000"/>
 
+<param name="update_min_a" value="0.1"/>
+<param name="update_min_d" value="0.2"/>
+
 <!-- add. params -->
 <param name="laser_max_range"           value="6"/>
-<param name="laser_max_beams"           value="180"/>
+<param name="laser_max_beams"           value="100"/>
 <param name="laser_z_hit"               value="0.5"/>
+<param name="laser_z_rand"              value="0.5"/>
+<!--
 <param name="laser_z_short"             value="0.05"/>
 <param name="laser_z_max"               value="0.05"/>
-<param name="laser_z_rand"              value="0.5"/>
+-->
 <param name="laser_sigma_hit"           value="0.2"/>
 <param name="laser_lambda_short"        value="0.1"/>
-<param name="laser_likelihood_max_dist" value="2.0"/>
+<param name="laser_likelihood_max_dist" value="6.0"/>
 <param name="laser_model_type"          value="likelihood_field"/>
-
-<param name="odom_model_type" value="diff-corrected "/>
 
 </node>
 
