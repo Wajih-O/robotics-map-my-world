@@ -2,7 +2,7 @@
 
 <launch>
   <!-- Robot pose -->
-  <arg name="x" default="0"/>
+  <arg name="x" default="2.0"/>
   <arg name="y" default="2.0"/>
   <arg name="z" default="0"/>
   <arg name="roll" default="0"/>
@@ -14,7 +14,7 @@
   <include file="$(find my_robot)/launch/camera_platform_control.xml"/>
 
   <!-- World File -->
-  <arg name="world_file" default="$(find my_robot)/worlds/house_14x12_world.world"/>
+  <arg name="world_file" default="$(find my_robot)/worlds/furnished_house_14x12_world.world"/>
 
   <!-- Launch Gazebo World -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
