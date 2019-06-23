@@ -127,7 +127,7 @@
 
    <!-- Camera -->
 
-    <link name="camera">
+  <link name="camera">
       <inertial>
       <mass value="0.1"/>
       <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
@@ -147,11 +147,12 @@
 	  </geometry>
 
 	</visual>
-    </link>
+  </link>
 
-  <gazebo reference="camera">
-    <material>Gazebo/Red</material>
-  </gazebo>
+
+  <link name="camera_link_optical">
+  </link>
+
 
   <joint type="fixed" name="camera_joint">
     <origin xyz="0.13 0 0" rpy="0 0 0"/>
@@ -159,6 +160,13 @@
     <parent link="camera_platform"/>
     <axis xyz="0 0 0" rpy="0 0 0"/>
   </joint>
+
+   <joint name="camera_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.5707 0 -1.5707"/>
+    <parent link="camera"/>
+    <child link="camera_link_optical"/>
+  </joint>
+
 
    <!-- Lidar platform -->
 
